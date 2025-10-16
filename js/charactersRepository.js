@@ -3,7 +3,7 @@ export class CharactersRepository {
 
   #MAX_RESULTS = 12;
 
-  async #fetchCharactersOfHouse(house) {
+  async fetchCharactersOfHouse(house) {
     const response = await fetch(
       `https://hp-api.onrender.com/api/characters/house/${house}`
     );
@@ -13,12 +13,20 @@ export class CharactersRepository {
     return characters.slice(0, this.#MAX_RESULTS);
   }
 
-  async fetchHousesCharacters() {
+  async fetchCharacterById(id) {
+    const response = await fetch(
+      `https://hp-api.onrender.com/api/character/${id}`
+    );
+
+    return await response.json();
+  }
+
+  async cacheHousesCharacters() {
     this.#characters = [
-      ...(await this.#fetchCharactersOfHouse("gryffindor")),
-      ...(await this.#fetchCharactersOfHouse("hufflepuff")),
-      ...(await this.#fetchCharactersOfHouse("ravenclaw")),
-      ...(await this.#fetchCharactersOfHouse("slytherin")),
+      ...(await this.fetchCharactersOfHouse("gryffindor")),
+      ...(await this.fetchCharactersOfHouse("hufflepuff")),
+      ...(await this.fetchCharactersOfHouse("ravenclaw")),
+      ...(await this.fetchCharactersOfHouse("slytherin")),
     ];
   }
 
