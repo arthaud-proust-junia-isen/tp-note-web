@@ -1,20 +1,35 @@
 export class CharactersRepository {
   #characters = [];
 
-  async getAll() {
-    // Cache API call
-    if (!this.#characters.length) {
-      const response = await fetch(
-        "https://hp-api.onrender.com/api/characters"
-      );
+  #MAX_RESULTS = 12;
 
-      this.#characters = await response.json();
-    }
+  async #fetchCharactersOfHouse(house) {
+    const response = await fetch(
+      `https://hp-api.onrender.com/api/characters/house/${house}`
+    );
 
-    return [...this.#characters];
+    const characters = await response.json();
+
+    return characters.slice(0, this.#MAX_RESULTS);
   }
 
-  async getFirsts(count) {
-    return (await this.getAll()).slice(0, count);
+  async fetchHousesCharacters() {
+    this.#characters = [
+      ...(await this.#fetchCharactersOfHouse("gryffindor")),
+      ...(await this.#fetchCharactersOfHouse("hufflepuff")),
+      ...(await this.#fetchCharactersOfHouse("ravenclaw")),
+      ...(await this.#fetchCharactersOfHouse("slytherin")),
+    ];
+  }
+
+  getAll() {
+    return [...this.#characters].slice(0, this.#MAX_RESULTS);
+  }
+
+  getForHouses(houses) {
+    return this.#characters
+      .filter((char) => houses.includes(char.house.toLowerCase()))
+      .sort((charA, charB) => charA.name.localeCompare(charB.name))
+      .slice(0, this.#MAX_RESULTS);
   }
 }

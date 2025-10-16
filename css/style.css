@@ -109,15 +109,29 @@ footer p {
   padding: 30px;
   flex-wrap: wrap;
 }
-.houses > div {
+.houses > label {
+  box-sizing: content-box;
+  border: 8px solid transparent;
+  background: none;
   border-radius: 140px;
   width: 140px;
   height: 140px;
   text-align: center;
 }
-.houses > div:hover {
+.houses > label input {
+  opacity: 0;
+  height: 0;
+  width: 0;
+  position: absolute;
+}
+.houses > label:hover,
+.houses > label:focus-within {
   background: #fff6e6;
 }
+.houses > label:has(input:checked) {
+  border-color: var(--gold);
+}
+
 .houses img {
   width: 121px;
   height: 136px;
