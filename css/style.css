@@ -143,6 +143,12 @@ footer p {
   flex-wrap: wrap;
   padding: 30px;
 }
+.sorter {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem 0;
+}
 .characters > div {
   padding: 30px;
   position: relative;
