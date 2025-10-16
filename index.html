@@ -53,6 +53,16 @@
 
     <section>
       <h3>Characters</h3>
+      <div id="characters-filterer" class="filterer">
+        <label>
+          <input name="filterby" type="checkbox" value="alive" checked>Alive
+        </label>
+
+        <label>
+          <input name="filterby" type="checkbox" value="dead" checked>Dead
+        </label>
+      </div>
+
       <div id="characters-sorter" class="sorter">
         <label>
           <input name="sortby" type="radio" value="none" checked>Don't sort
@@ -65,6 +75,7 @@
           <input name="sortby" type="radio" value="age">Sort by age
         </label>
       </div>
+
       <div id="characters-list" class="characters">
       </div>
     </section>

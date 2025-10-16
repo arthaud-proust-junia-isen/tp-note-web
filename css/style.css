@@ -143,12 +143,18 @@ footer p {
   flex-wrap: wrap;
   padding: 30px;
 }
-.sorter {
+.sorter,
+.filterer {
   display: flex;
   gap: 1rem;
   justify-content: center;
   padding: 1rem 0;
 }
+.sorter label input,
+.filterer label input {
+  margin-right: 4px;
+}
+
 .characters > div {
   padding: 30px;
   position: relative;

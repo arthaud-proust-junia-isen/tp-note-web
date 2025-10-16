@@ -4,6 +4,7 @@ export class CharactersRepository {
   #MAX_RESULTS = 12;
 
   #sortBy = null;
+  #filterBy = [];
 
   async fetchCharactersOfHouse(house) {
     const response = await fetch(
@@ -40,6 +41,12 @@ export class CharactersRepository {
     return this;
   }
 
+  filterBy(filters) {
+    this.#filterBy = filters;
+
+    return this;
+  }
+
   #sorted(characters) {
     if (this.#sortBy === "name") {
       return characters.toSorted((charA, charB) =>
@@ -54,15 +61,33 @@ export class CharactersRepository {
     return characters;
   }
 
+  #filtered(characters) {
+    return characters.filter((char) => {
+      if (this.#filterBy.includes("alive") && char.alive) {
+        return true;
+      }
+
+      if (this.#filterBy.includes("dead") && !char.alive) {
+        return true;
+      }
+
+      return false;
+    });
+  }
+
   getAll() {
-    return this.#sorted([...this.#characters].slice(0, this.#MAX_RESULTS));
+    return this.#sorted(
+      this.#filtered([...this.#characters]).slice(0, this.#MAX_RESULTS)
+    );
   }
 
   getForHouses(houses) {
     return this.#sorted(
-      this.#characters
-        .filter((char) => houses.includes(char.house.toLowerCase()))
-        .slice(0, this.#MAX_RESULTS)
+      this.#filtered(
+        this.#characters.filter((char) =>
+          houses.includes(char.house.toLowerCase())
+        )
+      ).slice(0, this.#MAX_RESULTS)
     );
   }
 }
