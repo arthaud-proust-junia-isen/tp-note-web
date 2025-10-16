@@ -7,6 +7,8 @@ const characterId = params.get("id");
 
 const character = await charactersRepository.fetchCharacterById(characterId);
 
+console.log(character);
+
 window.document.title = `Arthaud PROUST - ${character.name}`;
 
 document
@@ -24,3 +26,16 @@ document.querySelector(".perso__eye").innerText = character.eyeColour;
 document.querySelector(".perso__birthdate").innerText = character.dateOfBirth;
 
 document.querySelector(".perso__patronus").innerText = character.patronus;
+
+const houses = {
+  gryffindor: "/images/logo/Gryffindor.png",
+
+  hufflepuff: "/images/logo/Hufflepuff.png",
+
+  ravenclaw: "/images/logo/Ravenclaw.png",
+
+  slytherin: "/images/logo/Slytherin.png",
+};
+
+document.querySelector(".house__perso img").src =
+  houses[character.house.toLowerCase()];
