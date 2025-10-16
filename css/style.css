@@ -131,6 +131,7 @@ footer p {
 }
 .characters > div {
   padding: 30px;
+  position: relative;
 }
 .characters img {
   width: 150px;
@@ -148,6 +149,43 @@ footer p {
   margin-top: 1rem;
   font-size: 1.2rem;
   color: var(--Gold, #b99049);
+}
+.characters a {
+  text-decoration: none;
+  color: inherit;
+}
+.characters a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.characters div.gryffindor:hover img {
+  border-color: var(--red);
+}
+.characters div.gryffindor:hover p {
+  color: var(--red);
+}
+
+.characters div.hufflepuff:hover img {
+  border-color: var(--yellow);
+}
+.characters div.hufflepuff:hover p {
+  color: var(--yellow);
+}
+
+.characters div.ravenclaw:hover img {
+  border-color: var(--blue);
+}
+.characters div.ravenclaw:hover p {
+  color: var(--blue);
+}
+
+.characters div.slytherin:hover img {
+  border-color: var(--green);
+}
+.characters div.slytherin:hover p {
+  color: var(--green);
 }
 
 /* PAGE PERSO */
