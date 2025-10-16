@@ -18,7 +18,9 @@ export class CharactersRepository {
       `https://hp-api.onrender.com/api/character/${id}`
     );
 
-    return await response.json();
+    const characters = await response.json();
+
+    return characters[0];
   }
 
   async cacheHousesCharacters() {
